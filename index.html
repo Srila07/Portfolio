@@ -63,6 +63,7 @@ footer{text-align:center;padding:40px 20px;color:var(--mute);border-top:1px soli
 .lk{display:flex;justify-content:center;gap:16px;margin-top:16px}.lk a{font-weight:700}
 .tl{border-left:2px solid var(--a);padding-left:20px;display:grid;gap:16px}.tl div{position:relative}.tl div:before{content:"";position:absolute;left:-27px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--g)}
 .tl b{display:block}.tl small{color:var(--g)}
+.lnk{margin-top:auto;align-self:flex-start;background:none;border:0;border-bottom:1px solid var(--a);color:var(--a);font:700 14px var(--sans);padding:6px 0;cursor:pointer}.lnk:hover{color:var(--g);border-color:var(--g)}.cb .tag+.lnk,.cb div+.lnk{margin-top:12px}
 </style>
 </head>
 <body>
@@ -115,8 +116,8 @@ T("REVIL '25: Topsy Turvy (technical)","2025","National level symposium, CSE (Cy
 T("CONPHY 2025: Technical Quiz","26 Aug 2025","State-level technofest, SIMATS Engineering, Thandalam.","Participation","cquiz"),
 T("CONPHY 2025: Find the Imposter","26 Aug 2025","State-level technofest, SIMATS Engineering, Thandalam.","Participation","cimp")]},
 {id:"research",n:"Research and paper presentation",sub:"My research paper (IEEE format) and the symposium where I presented it.",html:`<div class="grid">
-<button class="card c" data-open="paper1,paper2,paper3,paper4,paper5" data-t="Privacy-Aware AI Document Simplification (research paper)"><img data-k="paper1" alt="Paper first page"><div class="cb"><h3>Privacy-Aware AI Document Simplification</h3><div class="when">Research paper, IEEE format. Authors: Srilakshmi S and Kavya P, R.M.D Engineering College</div><p>A framework that turns complex documents (bank policies, loan and house agreements, insurance, government forms) into Simple English and Tamil explanations, highlights deadlines, fees and penalties, and treats privacy as a core requirement.</p><div><span class="tag">Research paper</span><span class="tag">5 pages</span></div><div class="view">Read paper</div></div></button>
-<button class="card c" data-open="naks" data-t="Paper presentation: Nakshatra '26"><img data-k="naks" alt="Certificate preview"><div class="cb"><h3>Paper presentation at Nakshatra '26</h3><div class="when">10-11 Sep 2026</div><p>National Level Technical Symposium, S.A. Engineering College (Dept. of Computer Science and Business Systems).</p><div><span class="tag">Presented</span></div><div class="view">View certificate</div></div></button></div>`},
+<div class="card"><div class="cb"><h3>Privacy-Aware AI Document Simplification</h3><div class="when">Research paper, IEEE format. Authors: Srilakshmi S and Kavya P, R.M.D Engineering College</div><p>A framework that turns complex documents (bank policies, loan and house agreements, insurance, government forms) into Simple English and Tamil explanations, highlights deadlines, fees and penalties, and treats privacy as a core requirement.</p><div><span class="tag">Research paper</span><span class="tag">5 pages</span></div><button class="lnk" data-open="paper1,paper2,paper3,paper4,paper5" data-t="Privacy-Aware AI Document Simplification (research paper)">Read paper &#8599;</button></div></div>
+<div class="card"><div class="cb"><h3>Paper presentation at Nakshatra '26</h3><div class="when">10-11 Sep 2026</div><p>National Level Technical Symposium, S.A. Engineering College (Dept. of Computer Science and Business Systems).</p><div><span class="tag">Presented</span></div><button class="lnk" data-open="naks" data-t="Paper presentation: Nakshatra 26">View certificate &#8599;</button></div></div></div>`},
 {id:"awards",n:"Awards and achievements",sub:"Prizes and recognition.",cards:[
 T("1st Prize: Mehndi competition","College event","Conducted by R.M.D Engineering College.","1st prize"),
 T("Consolation Prize: Science project","College event","Science project contest, R.M.D Engineering College.","Consolation"),
@@ -127,8 +128,8 @@ const E=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'),app=document.get
 S.forEach(s=>{
   const b=s.html||'<div class="grid">'+s.cards.map(c=>{
     const w=/1st prize/i.test(c.x),k=c.c,u=c[5];
-    const inner=`${k?`<img data-k="${k}" alt="Certificate preview">`:''}<div class="cb"><h3>${E(c.t)}</h3>${c.w?`<div class="when">${E(c.w)}</div>`:''}<p>${E(c.d)}</p><div><span class="tag ${w?'w':''}">${E(c.x)}</span></div>${k?'<div class="view">View certificate</div>':u?'<div class="view">Open profile</div>':''}</div>`;
-    return k?`<button class="card c" data-open="${k}" data-t="${E(c.t)}">${inner}</button>`:u?`<a class="card c" href="${u}" target="_blank" rel="noopener" style="text-decoration:none">${inner}</a>`:`<div class="card">${inner}</div>`}).join('')+'</div>';
+    const inner=`<div class="cb"><h3>${E(c.t)}</h3>${c.w?`<div class="when">${E(c.w)}</div>`:''}<p>${E(c.d)}</p><div><span class="tag ${w?'w':''}">${E(c.x)}</span></div>${k?`<button class="lnk" data-open="${k}" data-t="${E(c.t)}">View certificate &#8599;</button>`:''}</div>`;
+    return `<div class="card">${inner}</div>`}).join('')+'</div>';
   app.insertAdjacentHTML('beforeend',`<section id="${s.id}"><h2>${s.n}</h2><p class="sub">${s.sub}</p>${b}</section>`);
 });
 document.querySelectorAll('img[data-k]').forEach(i=>i.src=C[i.dataset.k]);
